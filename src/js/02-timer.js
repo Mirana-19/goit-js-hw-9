@@ -25,7 +25,7 @@ class Timer {
     }
 
     this.intervalId = setInterval(() => {
-      const time = this.countRemainingTime(this.selectedDate);
+      const time = this.countRemainingTimeInMs(this.selectedDate);
 
       if (time < 0) {
         return this.stopTimer(this.intervalId);
@@ -42,7 +42,7 @@ class Timer {
     clearInterval(interval);
   }
 
-  countRemainingTime(date) {
+  countRemainingTimeInMs(date) {
     return date - Date.now();
   }
 
