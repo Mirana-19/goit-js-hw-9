@@ -20,10 +20,6 @@ class Timer {
   }
 
   startTimer(startBtn, dateInput) {
-    if (this.selectedDate - Date.now() < 0) {
-      return Notify.failure('Please choose date in future');
-    }
-
     this.intervalId = setInterval(() => {
       const time = this.countRemainingTimeInMs(this.selectedDate);
       const formattedTime = this.formatTime(this.convertMs(time));
@@ -99,6 +95,9 @@ const options = {
   onClose(selectedDates) {
     timer.selectedDate = selectedDates[0].getTime();
 
+    if (selectedDates[0] < new Date()) {
+      return Notify.failure('Please choose date in future');
+    }
     refs.startBtn.disabled = false;
   },
 };
